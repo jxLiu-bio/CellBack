@@ -124,3 +124,6 @@ Install scvi-tools in the virtual environment by pip:
 ```
 pip install scvi-tools==1.15.0
 ```
+
+## Tutorial
+The detail step-by-step usage guide can be found in [Tutorial](https://diffgsp.readthedocs.io/en/latest/).
