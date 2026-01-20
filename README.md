@@ -15,7 +15,7 @@ In addition to cell imputation, CellBack:
 - denoises gene expression for sequencing-based ST platforms  
 - enables spatial multi-omics integration at single-cell resolution  
 
-[comment]: ![CellBack overview](source/image/CellBack_framework.png)
+![CellBack overview](source/image/CellBack_framework.png)
 
 ---
 
