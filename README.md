@@ -71,7 +71,7 @@ Tested systems:
 ### Python requirements
 Python **>= 3.8**
 
-### Python Dependencies
+### Python dependencies
 
 ```txt
 mudata==0.2.4
