@@ -15,7 +15,7 @@ In addition to cell imputation, CellBack:
 - denoises gene expression for sequencing-based ST platforms  
 - enables spatial multi-omics integration at single-cell resolution  
 
-[comment]: ![CellBack overview](source/image/CellBack_framework.png)
+![CellBack overview](source/img/CellBack_framework.png)
 
 ---
 
@@ -71,7 +71,7 @@ Tested systems:
 ### Python requirements
 Python **>= 3.8**
 
-### Python Dependencies
+### Python dependencies
 
 ```txt
 mudata==0.2.4
@@ -88,25 +88,25 @@ scikit-misc==0.3.1
 ### 1. Create a virtual environment (recommended)
 We recommend using conda to manage dependencies by:
 
-```txt
+```bash
 conda create -n cellback_env python=3.9
 conda activate cellback_env
 ```
 ### 2. Install CellBack
 Download the CellBack package from GitHub:
-```angular2html
+```bash
 git clone https://github.com/Yu-Lab-HUST/CellBack.git
 cd CellBack
 ```
 and install by:
-```angular2html
+```bash
 pip install .
 ```
 
 ### 3. Install PyTorch and PyTorch Geometric
 Install PyTorch according to your hardware configuration. For example, you can run:
 
-```txt
+```bash
 pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 torchaudio==2.1.0+cu121   --index-url https://download.pytorch.org/whl/cu121
 pip install torch_geometric
 ```
@@ -114,13 +114,18 @@ More information can be found at: [PyTorch](https://pytorch.org/get-started/loca
 
 
 ### 4. Install Seurat
-You can install Seurat in the virtual environment by conda:
-```txt
+Seurat is used to reconstruct a shared expression matrix between scRNA-seq and ST data,
+which is subsequently used to derive the microenvironment matrix. You can install Seurat in the virtual environment by conda:
+```bash
 conda install -c bioconda r-seurat
 ```
 
 ### 5. Install scvi-tools
-Install scvi-tools in the virtual environment by pip:
-```
+scANVI is employed to learn batch-corrected low-dimensional embeddings of cells,
+which are subsequently used to construct the cell–cell adjacency graph for input into the graph attention network. Install scvi-tools in the virtual environment by pip:
+```bash
 pip install scvi-tools==1.15.0
 ```
+
+## Tutorial
+The detail step-by-step usage guide can be found in [Tutorial](https://diffgsp.readthedocs.io/en/latest/).
