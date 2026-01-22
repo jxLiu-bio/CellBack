@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'DeepGFT'
-copyright = '2022, Sunli Sun; Jixin Liu'
-author = 'Sunli Sun; Jixin Liu'
+project = 'CellBack'
+copyright = '2025, Shuai Jiang; Jixin Liu'
+author = 'Shuai Jiang; Jixin Liu'
 
 # The full version, including alpha/beta/rc tags
 release = 'v0.0.1'
