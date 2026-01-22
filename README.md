@@ -128,4 +128,4 @@ pip install scvi-tools==1.15.0
 ```
 
 ## Tutorial
-The detail step-by-step usage guide can be found in [Tutorial](https://diffgsp.readthedocs.io/en/latest/).
+The detail step-by-step usage guide can be found in [Tutorial](https://cellback.readthedocs.io/en/latest/).
