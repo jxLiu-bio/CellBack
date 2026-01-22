@@ -1,0 +1,38 @@
+[project]
+name = "CellBack"
+version = "0.1.0"
+description = "A Python package for cell imputation on whole-transcriptome single cell spatial transcriptomics platform"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+  { name = "Shuai Jiang, Jixin Liu", email = "shjiang@mail.sdu.edu.cn, frankliu210@163.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+  "mudata==0.2.4",
+  "anndata==0.10.8",
+  "scanpy==1.10.2",
+  "igraph==0.11.6",
+  "leidenalg==0.10.2",
+  "scikit-learn==1.6.1",
+  "scikit-misc==0.3.1",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+
+[project.urls]
+Homepage = "https://github.com/jxLiu-bio/CellBack"
+Documentation = "https://github.com/jxLiu-bio/CellBack/wiki"
+
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]

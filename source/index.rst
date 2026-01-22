@@ -1,4 +1,5 @@
-CellBack: microenvironment-aware cell imputation for single-cell resolution spatial transcriptomics via optimal matching ==================================================================================================================
+CellBack: microenvironment-aware cell imputation for single-cell resolution spatial transcriptomics via optimal matching 
+
 
 .. toctree::
    :caption: Main

@@ -1,24 +1,24 @@
 ## Data preparation
 
-### Spatial transcriptomics data
+## Tutorial Example Data
 
-We used four spatial gene expression datasets. 
+To demonstrate CellBack’s functionality, we provide four example dataset pairs used for **cell imputation, denoising, gene imputation, and multi-omics integration**:
 
-1. The first dataset is the LIBD human dorsolateral prefrontal cortex (DLPFC) with 12 tissue slices from the package [spatialLIBD](http://research.libd.org/spatialLIBD/). 
+1. **Mouse Hippocampus**  
+   - Slide-tags data and matched scRNA-seq data (SCP2162)
 
-2. Mouse visual cortex STARmap data is obtained from the [STARMap](https://www.starmapresources.com/data). 
+2. **Human Brain**  
+   - Slide-tags data and matched scRNA-seq data (SCP2167)
 
-3. Two breast cancer datasets can be obtained from 10x Genomics Data Repository, including [V1](https://www.10xgenomics.com/cn/resources/datasets/human-breast-cancer-block-a-section-1-1-standard-1-1-0) and [V2](https://www.10xgenomics.com/cn/resources/datasets/human-breast-cancer-block-a-section-2-1-standard-1-1-0). 
+3. **Mouse Cortex**  
+   - seqFISH+ data: [CaiGroup/seqFISH-PLUS](https://github.com/CaiGroup/seqFISH-PLUS)  
+     - Spatial coordinates generated using `stitchFieldCoordinates` in Giotto  
+   - Smart-seq data (VISp): [Allen Brain Atlas](https://portal.brain-map.org/atlases-and-data/rnaseq/mouse-v1-and-alm-smart-seq)
 
-4. Human Lymph Node can be obtained from [10x Genomics Data Repository](https://www.10xgenomics.com/cn/resources/datasets/human-lymph-node-1-standard-1-1-0).
+4. **Mouse Brain (SeekSpace)**  
+   - SeekSpace spatial transcriptomics data (WTH627): [NGDC OMIX012096](https://ngdc.cncb.ac.cn/omix/release/OMIX012096)  
+   - SNARE-seq data (adult mouse cerebral cortex): [GEO GSE126074](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE126074)
 
-All data can be downloaded from [DeepGFT data](https://drive.google.com/drive/folders/1uzrXJXbtwFomQuEldagfyA0Z_wfNqEza?usp=sharing).
-
-We recommend load Visium data by:
-```python
-import scanpy as sc
-adata = sc.read_visium(path_to_visium_dataset)
-```
-For all spatial transcriptomics datasets, it should be pointed out that raw count matrix needs to be found at _adata.X_ and the spatial coordinate information needs to be found at _adata.obs_ or _adata.obsm_
+These datasets can also be downloaded from [Google Drive](https://drive.google.com/drive/folders/1V0lYQnMygb_Jvu95qRzqpr6WhkqMGTSb?usp=drive_link)in **h5ad** format, already sorted for convenience.
 
 
