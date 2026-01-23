@@ -1,6 +1,6 @@
 ## Data preparation
 
-## Tutorial Example Data
+# Tutorial Example Data
 
 To demonstrate CellBack’s functionality, we provide four example dataset pairs used for **cell imputation, denoising, gene imputation, and multi-omics integration**:
 
