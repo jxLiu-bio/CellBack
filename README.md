@@ -1,4 +1,5 @@
-# CellBack: microenvironment-aware cell imputation for single-cell resolution spatial transcriptomics
+# CellBack: microenvironment-aware cell imputation for spatial transcriptomics via globally optimal matching
+
 
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-green)
 ![Language](https://img.shields.io/badge/Language-python3-green)
