@@ -1,6 +1,6 @@
 ## About
 
-**CellBack** is a Python package for **microenvironment-aware cell imputation** in single-cell resolution spatial transcriptomics (ST) data.
+**CellBack** is a Python package for **microenvironment-aware cell imputation** in single-cell whole-transcriptome spatial transcriptomics (scWT-ST) data.
 
 CellBack reconstructs complete tissue maps at **single-cell resolution** by integrating **matched scRNA-seq data** with **spatial information** and **microenvironmental context**.
 
