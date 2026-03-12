@@ -96,7 +96,7 @@ conda activate cellback_env
 ### 2. Install CellBack
 Download the CellBack package from GitHub:
 ```bash
-git clone https://github.com/Yu-Lab-HUST/CellBack.git
+git clone https://github.com/jxLiu-bio/CellBack.git
 cd CellBack
 ```
 and install by:
