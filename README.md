@@ -1,4 +1,4 @@
-# CellBack: microenvironment-aware cell imputation for spatial transcriptomics via globally optimal matching
+# CellBack: microenvironment-aware spatial organization reconstruction for spatial transcriptomics via globally optimal matching
 
 
 ![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-green)
@@ -8,7 +8,7 @@
 ![Docs](https://img.shields.io/badge/docs-passing-green)
 
 Spatial transcriptomics (ST) enables gene expression profiling within intact tissues while preserving spatial context. However, recently developed **single-cell whole-transcriptome spatial transcriptomics (scWT-ST) platforms** (e.g. *Slide-tags*, *SeekSpace*) often suffer from **substantial cell loss**, resulting in incomplete tissue landscapes and compromised downstream analyses.
-**CellBack** is a **microenvironment-aware cell imputation framework** that reconstructs complete spatial tissue maps at **single-cell resolution** by optimally mapping cells from matched scRNA-seq data into spatial contexts from a global perspective.  
+**CellBack** is a **microenvironment-aware spatial organization reconstruction framework** that reconstructs more complete spatial tissue maps at **single-cell resolution** by optimally mapping cells from matched scRNA-seq data into spatial contexts from a global perspective.  
 By integrating **learned microenvironment representations** with a **globally optimal matching strategy**, CellBack faithfully recovers missing cells while preserving spatial tissue architectures.
 
 In addition to cell imputation, CellBack:
