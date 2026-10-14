@@ -60,15 +60,20 @@ def inter_correlation_calculation(adata_sc,
                                   adata_sp,
                                   basis='X_pca',
                                   k=5):
-    from joblib import Parallel, delayed
-    correlation_results = np.zeros((len(adata_sc.obs_names),len(adata_sp.obs_names)))
-    def _compute_correlation(index1, vec1, data):
-        return [pearsonr(vec1, vec2)[0] for vec2 in data]
 
-    results = Parallel(n_jobs=-1)(delayed(_compute_correlation)(index1, vec1, adata_sp.obsm[basis]) for index1,
-    vec1 in tqdm(enumerate(adata_sc.obsm[basis]), total=len(adata_sc.obs_names)))
-    for index1, result in enumerate(results):
-        correlation_results[index1, :] = result
+    X = np.asarray(adata_sc.obsm[basis], dtype=np.float32)
+    Y = np.asarray(adata_sp.obsm[basis], dtype=np.float32)
+
+    X_centered = X - X.mean(axis=1, keepdims=True)
+    Y_centered = Y - Y.mean(axis=1, keepdims=True)
+
+    X_norm = np.linalg.norm(X_centered, axis=1, keepdims=True)
+    Y_norm = np.linalg.norm(Y_centered, axis=1, keepdims=True)
+
+    X_normalized = X_centered / X_norm
+    Y_normalized = Y_centered / Y_norm
+
+    correlation_results = X_normalized @ Y_normalized.T
 
     edge_index = []
     for i in range(len(adata_sc.obs_names)):
@@ -197,7 +202,7 @@ def run_scvi(slide,
 
     adata_sp = adata[adata.obs['batch'] == "slide"].copy()
     adata_sc = adata[adata.obs['batch'] == "singlecell"].copy()
-    adata_sp.obsm['spatial'] = slide.obsm['coordinate']
+    adata_sp.obsm['spatial'] = slide.obsm['spatial']
 
     return adata_sc, adata_sp
 
@@ -330,15 +335,20 @@ def denoising(adata_sp,
     n_cols = len(adata_sp.obs_names)
     micro_embedding_sc = adata_sc.obsm['embedding']
     micro_embedding_sp = adata_sp.obsm['embedding']
-    correlation_matrix = np.zeros((n_rows, n_cols))
-    def _compute_correlation(index1, vec1, banksy_train):
-        return [pearsonr(vec1, vec2)[0] for vec2 in banksy_train]
 
-    from joblib import Parallel, delayed
-    results = Parallel(n_jobs=-1)(delayed(_compute_correlation)(index1, vec1, micro_embedding_sp)
-                                  for index1, vec1 in tqdm(enumerate(micro_embedding_sc), total=n_rows))
-    for index1, result in enumerate(results):
-        correlation_matrix[index1, :] = result
+    X = np.asarray(micro_embedding_sc, dtype=np.float32)
+    Y = np.asarray(micro_embedding_sp, dtype=np.float32)
+
+    X_centered = X - X.mean(axis=1, keepdims=True)
+    Y_centered = Y - Y.mean(axis=1, keepdims=True)
+
+    X_norm = np.linalg.norm(X_centered, axis=1, keepdims=True)
+    Y_norm = np.linalg.norm(Y_centered, axis=1, keepdims=True)
+
+    X_normalized = X_centered / X_norm
+    Y_normalized = Y_centered / Y_norm
+
+    correlation_matrix = X_normalized @ Y_normalized.T
 
     n = k
     indices_spatial = np.argsort(correlation_matrix, axis=0)[-n:][::-1]
@@ -368,10 +378,10 @@ def denoising(adata_sp,
     adata_denoise = ad.AnnData(average_expression)
     adata_denoise.obs_names = slide_ori.obs_names
     adata_denoise.var_names = slide_ori.var_names
-    adata_denoise.obsm['spatial'] = slide_ori.obsm['coordinate']
+    adata_denoise.obsm['spatial'] = slide_ori.obsm['spatial']
     adata_denoise.obs['cell_type'] = slide_ori.obs['cell_type']
 
-    return adata_denoise
+    return adata_denoise, correlation_matrix
 
 def imputation_micro(adata_sp,
               adata_sc,
@@ -401,15 +411,20 @@ def imputation_micro(adata_sp,
     n_cols = len(adata_sp.obs_names)
     micro_embedding_sc = adata_sc.obsm['embedding']
     micro_embedding_sp = adata_sp.obsm['embedding']
-    correlation_matrix = np.zeros((n_rows, n_cols))
-    def _compute_correlation(index1, vec1, banksy_train):
-        return [pearsonr(vec1, vec2)[0] for vec2 in banksy_train]
 
-    from joblib import Parallel, delayed
-    results = Parallel(n_jobs=-1)(delayed(_compute_correlation)(index1, vec1, micro_embedding_sp)
-                                  for index1, vec1 in tqdm(enumerate(micro_embedding_sc), total=n_rows))
-    for index1, result in enumerate(results):
-        correlation_matrix[index1, :] = result
+    X = np.asarray(micro_embedding_sc, dtype=np.float32)
+    Y = np.asarray(micro_embedding_sp, dtype=np.float32)
+
+    X_centered = X - X.mean(axis=1, keepdims=True)
+    Y_centered = Y - Y.mean(axis=1, keepdims=True)
+
+    X_norm = np.linalg.norm(X_centered, axis=1, keepdims=True)
+    Y_norm = np.linalg.norm(Y_centered, axis=1, keepdims=True)
+
+    X_normalized = X_centered / X_norm
+    Y_normalized = Y_centered / Y_norm
+
+    correlation_matrix = X_normalized @ Y_normalized.T
 
     n = k
     indices_spatial = np.argsort(correlation_matrix, axis=0)[-n:][::-1]
@@ -439,7 +454,7 @@ def imputation_micro(adata_sp,
         loss = - gv_term - 1e-2 * regularizer_term
         loss.backward()
         optimizer.step()
-        if epoch % 1000 == 0:
+        if epoch % 100 == 0:
             print(f'Epoch {epoch}, Loss: {loss.item():.4f}')
 
     with torch.no_grad():
